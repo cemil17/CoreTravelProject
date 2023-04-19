@@ -1,0 +1,93 @@
+﻿@using EntityLayer.Concrete
+@model List<Destination>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@{
+	string color = "";
+	string state = "";
+}
+
+<div class="col-12">
+	<div class="card mb-4">
+		<div class="card-header pb-0">
+			<h6>Rotalar</h6>
+		</div>
+		<div class="card-body px-0 pt-0 pb-2">
+			<div class="table-responsive p-0">
+				<table class="table align-items-center mb-0">
+					<thead>
+						<tr>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Şehir</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Süre</th>
+							<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Durum</th>
+							<th class="text-secondary opacity-7"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							@if (item.Status == true)
+							{
+								color = "badge badge-sm bg-gradient-success";
+								state = "Aktif";
+							}
+							else
+							{
+								color = "badge badge-sm bg-gradient-danger";
+								state = "Pasif";
+							}
+
+							<tr>
+								<td>
+									<div class="d-flex px-2 py-1">
+										<div>
+											<img src="@item.ImageURL" data-toggle="tooltip" data-placement="top" title="@item.DestinationID" class="avatar avatar-sm me-3" alt="user1">
+										</div>
+										<div class="d-flex flex-column justify-content-center">
+											<a href="/Destination/DestinationDetails/@item.DestinationID" data-toggle="tooltip" data-placement="top" title="Turun detayları">
+												<h6 class="mb-0 text-sm">@item.City</h6>
+											</a>
+										</div>
+									</div>
+								</td>
+								<td>
+									<p class="text-xs font-weight-bold mb-0">@item.DayNight</p>
+								</td>
+								<td class="align-middle text-center text-sm">
+									<span class="@color">@state</span>
+								</td>
+								<td class="align-middle">
+									<div class="dropdown">
+										<button class="btn bg-gradient dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="tooltip" data-placement="top" title="İşlemler" data-bs-toggle="dropdown" aria-expanded="false">
+											<i class="ni ni-settings"></i>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<li>
+												<a class="dropdown-item" href="#">
+													<i class="ni ni-fat-remove text-danger"></i>
+													Sil
+												</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="#">
+													<i class="ni ni-settings-gear-65 text-info"></i>
+													Güncelle
+												</a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
